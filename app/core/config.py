@@ -12,11 +12,11 @@ class Settings:
 
 def get_settings() -> Settings:
     return Settings(
-        DATABASE_URL="postgresql+asyncpg://postgres:12345@127.0.0.1:5438/my_db",
-        cors_allowed=['http://localhost:3000'],
-        SECRET_KEY="17274z2287JK.",
+        DATABASE_URL="postgresql+asyncpg://user:password@localhost:5432/dbname",
+        cors_allowed = ['http://localhost:3000'],
+        SECRET_KEY="your_secret_key",
         PAYMENT_KEY="gfdmhghif38yrf9ew0jkf32",
-        ACCESS_TOKEN_EXPIRE_MINUTE=30
+        ACCESS_TOKEN_EXPIRE_MINUTE=30,
     )
 
 settings = get_settings()

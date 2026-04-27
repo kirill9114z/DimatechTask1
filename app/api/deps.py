@@ -1,7 +1,7 @@
 # app/api/deps.py
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from jwt.exceptions import InvalidTokenError      # ← PyJWT исключение
+from jwt.exceptions import InvalidTokenError      
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.security import decode_token
@@ -24,7 +24,7 @@ async def get_current_user(
         user_id = payload.get("sub")
         if user_id is None:
             raise credentials_exception
-    except InvalidTokenError:           # ← ловим PyJWT ошибки
+    except InvalidTokenError:           
         raise credentials_exception
 
     user = await db.get(User, int(user_id))

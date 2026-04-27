@@ -8,7 +8,6 @@ from passlib.context import CryptContext
 
 from app.core.config import settings
 
-# --- Пароли ---
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str) -> str:
@@ -18,7 +17,6 @@ def verify_password(plain: str, hashed: str) -> bool:
     return pwd_context.verify(plain, hashed)
 
 
-# --- JWT ---
 ALGORITHM = "HS256"
 
 def create_access_token(user_id: int, is_admin: bool) -> str:
@@ -33,11 +31,9 @@ def create_access_token(user_id: int, is_admin: bool) -> str:
     return jwt.encode(payload, settings.SECRET_KEY, algorithm=ALGORITHM)
 
 def decode_token(token: str) -> dict:
-    # InvalidTokenError покрывает: истёкший токен, неверную подпись, кривой формат
     return jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
 
 
-# --- Подпись webhook ---
 def verify_webhook_signature(
     transaction_id: str,
     account_id: int,

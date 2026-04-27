@@ -13,7 +13,6 @@ async def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: AsyncSession = Depends(get_db),
 ):
-    # Роут только принимает запрос и вызывает сервис
     return await login_service(
         email=form_data.username,
         password=form_data.password,
